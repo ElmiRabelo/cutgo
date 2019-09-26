@@ -13,6 +13,8 @@ import guestMiddleware from "./app/middlewares/guest";
 //controllers
 import UserController from "./app/controllers/UserController";
 import SessionController from "./app/controllers/SessionController";
+import DashboardController from "./app/controllers/DashboardController";
+import FileController from "./app/controllers/FileController";
 
 ///////////////////////////////////////////////////
 //rotas
@@ -23,6 +25,9 @@ routes.use((req, res, next) => {
 
   return next();
 });
+
+//rota para lidar com arquivos
+routes.get("/files/:file", FileController.show);
 
 //sigin
 routes.use("/app", authMiddleware);
@@ -35,10 +40,7 @@ routes.get("/signup", guestMiddleware, UserController.create);
 routes.post("/signup", upload.single("avatar"), UserController.store);
 
 //dashboard
-routes.get("/app/dashboard", (req, res) => {
-  console.log(req.session.user);
-  return res.render("dashboard");
-});
+routes.get("/app/dashboard", DashboardController.index);
 
 //logout
 routes.get("/app/logout", SessionController.destroy);
