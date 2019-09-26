@@ -1,6 +1,8 @@
-const express = require("express");
-const nunjucks = require("nunjucks");
-const path = require("path");
+import express from "express";
+import session from "express-session";
+const FileStore = require("session-file-store")(session);
+import nunjucks from "nunjucks";
+import path from "path";
 import routes from "./routes";
 
 class App {
@@ -15,6 +17,18 @@ class App {
 
   middlewares() {
     this.express.use(express.urlencoded({ extended: false }));
+    //express session resposável por configurar o a perpetuação do login do user
+    this.express.use(
+      session({
+        name: "root",
+        secret: "MyAppSecret",
+        resave: true,
+        store: new FileStore({
+          path: path.resolve(__dirname, "..", "tmp", "sessions")
+        }),
+        saveUnitialized: true
+      })
+    );
   }
 
   views() {
