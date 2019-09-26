@@ -12,19 +12,26 @@ class SessionController {
     //verifica se existe algum user com o email passado
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      console.log("Usuário não encontrado!");
+      req.flash("error", "Usuário não encontrado!");
       return res.redirect("/");
     }
 
     //verifica se o password informado não coincide com o db
     if (!(await user.checkPassword(password))) {
-      console.log("Senha não coincide");
+      req.flash("error", "Senha não coincide");
       return res.redirect("/");
     }
 
     req.session.user = user;
 
     return res.redirect("/app/dashboard");
+  }
+
+  destroy(req, res) {
+    req.session.destroy(() => {
+      res.clearCookie("root");
+      return res.redirect("/");
+    });
   }
 }
 

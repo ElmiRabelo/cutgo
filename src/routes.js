@@ -17,6 +17,13 @@ import SessionController from "./app/controllers/SessionController";
 ///////////////////////////////////////////////////
 //rotas
 
+routes.use((req, res, next) => {
+  res.locals.flashSuccess = req.flash("success");
+  res.locals.flashError = req.flash("error");
+
+  return next();
+});
+
 //sigin
 routes.use("/app", authMiddleware);
 
@@ -32,5 +39,8 @@ routes.get("/app/dashboard", (req, res) => {
   console.log(req.session.user);
   return res.render("dashboard");
 });
+
+//logout
+routes.get("/app/logout", SessionController.destroy);
 
 export default routes;
