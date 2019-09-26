@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       provider: DataTypes.BOOLEAN
     },
     {
+      //criptografa a senha utilizando o bcrypt
       hooks: {
         beforeSave: async user => {
           if (user.password) {
@@ -21,5 +22,10 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   );
+  // verifica se a senha passada como parametro é igual a senha armazenada em password_hash no db.
+  User.prototype.checkPassword = function(password) {
+    return bcrypt.compare(password, this.password_hash);
+  };
+
   return User;
 };
