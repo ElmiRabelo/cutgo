@@ -16,13 +16,19 @@ button {
 }
 
 body {
-  background: #7159c1;
+  background: #b300b3;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   text-rendering: optimizelegibility !important;
   -webkit-font-smoothing: antialiased !important;
 }
 
+.logo {
+  object-fit: contain;
+  width: 80%;
+  height: 80%;
+  align-self: center;
+}
 .auth-wrapper {
   height: 100%;
   display: flex;
@@ -41,7 +47,7 @@ body {
 .auth-wrapper form {
   display: flex;
   flex-direction: column;
-  max-width: 300px;
+  max-width: 400px;
   width: 100%;
   background: #fff;
   border-radius: 4px;
@@ -50,7 +56,7 @@ body {
 }
 
 .auth-wrapper form > img {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .auth-wrapper form input:not([type="checkbox"]) {
@@ -111,7 +117,7 @@ body {
   font-size: 14px;
   border: 0;
   color: #fff;
-  background: #7159c1;
+  background: #00b300;
   margin-top: 5px;
 }
 

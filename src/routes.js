@@ -16,6 +16,7 @@ import SessionController from "./app/controllers/SessionController";
 import DashboardController from "./app/controllers/DashboardController";
 import FileController from "./app/controllers/FileController";
 import AppointmentController from "./app/controllers/AppointmentController";
+import AvailableController from "./app/controllers/AvailableController";
 
 ///////////////////////////////////////////////////
 //rotas
@@ -48,5 +49,9 @@ routes.get("/app/logout", SessionController.destroy);
 
 //appointments
 routes.get("/app/appointments/new/:provider", AppointmentController.create);
+routes.post("/app/appointments/new/:provider", AppointmentController.store);
+
+//available
+routes.get("/app/available/:provider", AvailableController.index);
 
 export default routes;
